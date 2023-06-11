@@ -41,7 +41,14 @@ python main.py --cfg configs/GRIT/zinc-GRIT.yaml  wandb.use False accelerator "c
 
 # replace 'cuda:0' with the device to use
 # replace 'xx/xx/data' with your data-dir (by default './datasets")
+# replace 'configs/GRIT/zinc-GRIT.yaml' with any experiments to run
 ```
+
+### Configurations and Scripts
+
+- Configurations are available under `./configs/GRIT/xxxxx.yaml`
+- Scripts to execute are available under `./scripts/xxx.sh`
+  - will run 4 trials of experiments parallelly on `GPU:0,1,2,3`.
 
 
 
