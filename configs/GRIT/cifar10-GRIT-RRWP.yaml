@@ -1,0 +1,75 @@
+out_dir: results
+metric_best: accuracy
+tensorboard_each_run: True  # Log to Tensorboard each run
+accelerator: "cuda:0"
+num_workers: 10
+mlflow:
+  use: False
+  project: Exp
+  name: cifar10-GRIT-RRWP
+wandb:
+  use: False
+  project: CIFAR10
+dataset:
+  pe_transform_on_the_fly: True
+  format: PyG-GNNBenchmarkDataset
+  name: CIFAR10
+  task: graph
+  task_type: classification
+  transductive: False
+  node_encoder: True
+  node_encoder_name: LinearNode
+  node_encoder_bn: False
+  edge_encoder: True
+  edge_encoder_name: LinearEdge
+  edge_encoder_bn: False
+posenc_RRWP:
+  enable: True
+  ksteps: 18
+  add_identity: True
+  add_node_attr: False
+  add_inverse: False
+train:
+  mode: custom
+  batch_size: 16
+  eval_period: 1
+  ckpt_period: 100
+model:
+  type: GritTransformer
+  loss_fun: cross_entropy
+  edge_decoding: dot
+  graph_pooling: mean
+gt:  # Hyperparameters optimized for ~100k budget.
+  layer_type: GritTransformer
+  layers: 3
+  n_heads: 4
+  dim_hidden: 52  # `gt.dim_hidden` must match `gnn.dim_inner`
+  dropout: 0.0
+  attn_dropout: 0.5
+  layer_norm: False
+  batch_norm: True
+  attn:
+    clamp: 5.
+    act: 'relu'
+    full_attn: True
+    edge_enhance: True
+    O_e: True
+    norm_e: True
+gnn:
+  head: default
+  layers_pre_mp: 0
+  layers_post_mp: 2
+  dim_inner: 52  # `gt.dim_hidden` must match `gnn.dim_inner`
+  batchnorm: False
+  act: relu
+  dropout: 0.0
+  agg: mean
+  normalize_adj: False
+optim:
+  clip_grad_norm: True
+  optimizer: adamW
+  weight_decay: 1e-5
+  base_lr: 0.001
+  max_epoch: 200
+  scheduler: cosine_with_warmup
+  num_warmup_epochs: 5

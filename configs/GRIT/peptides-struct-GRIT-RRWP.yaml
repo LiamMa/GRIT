@@ -1,0 +1,72 @@
+out_dir: results
+metric_best: mae
+metric_agg: argmin
+accelerator: "cuda:0"
+mlflow:
+  use: False
+  project: Exp
+  name: peptides-struct-GRIT-RRWP
+wandb:
+  use: False
+  project: peptides-struct
+dataset:
+  format: OGB
+  name: peptides-structural
+  task: graph
+  task_type: regression
+  transductive: False
+  node_encoder: True
+  node_encoder_name: Atom
+  node_encoder_bn: False
+  edge_encoder: True
+  edge_encoder_name: Bond
+  edge_encoder_bn: False
+posenc_RRWP:
+  enable: True
+  ksteps: 24
+  add_identity: True
+  add_node_attr: False
+  add_inverse: False
+train:
+  mode: custom
+#  batch_size: 32
+  batch_size: 16
+  eval_period: 1
+  ckpt_period: 100
+model:
+  type: GritTransformer
+  loss_fun: l1
+  graph_pooling: mean
+gt:
+  layer_type: GritTransformer
+  layers: 4
+  n_heads: 8
+  dim_hidden: 96 # `gt.dim_hidden` must match `gnn.dim_inner`
+  dropout: 0.05
+  attn_dropout: 0.2
+  layer_norm: False
+  batch_norm: True
+  attn:
+    clamp: 5.
+    act: 'relu'
+    full_attn: True
+    edge_enhance: True
+    O_e: True
+    norm_e: True
+    signed_sqrt: True
+gnn:
+  head: default
+  layers_pre_mp: 0
+  layers_post_mp: 2 # Not used when `gnn.head: san_graph`
+  dim_inner: 96  # `gt.dim_hidden` must match `gnn.dim_inner`
+  batchnorm: True
+  act: relu
+  dropout: 0.0
+optim:
+  clip_grad_norm: True
+  optimizer: adamW
+  weight_decay: 0.0
+  base_lr: 0.0003
+  max_epoch: 200
+  scheduler: cosine_with_warmup
+  num_warmup_epochs: 10

@@ -1,0 +1,73 @@
+out_dir: results
+metric_best: accuracy-SBM
+tensorboard_each_run: True  # Log to Tensorboard each run
+accelerator: "cuda:0"
+mlflow:
+  use: False
+  project: Exp
+  name: cluster-GRIT-RRWP
+wandb:
+  use: False
+  project: CLUSTER
+dataset:
+  format: PyG-GNNBenchmarkDataset
+  name: CLUSTER
+  task: graph
+  task_type: classification
+  transductive: False
+  split_mode: standard
+  node_encoder: True
+  node_encoder_name: LinearNode
+  node_encoder_bn: False
+  edge_encoder: True
+  edge_encoder_name: DummyEdge
+  edge_encoder_bn: False
+posenc_RRWP:
+  enable: True
+  ksteps: 32
+  add_identity: True
+  add_node_attr: False
+  add_inverse: False
+train:
+  mode: custom
+  batch_size: 16
+  eval_period: 1
+  ckpt_period: 100
+model:
+  type: GritTransformer
+  loss_fun: weighted_cross_entropy
+  edge_decoding: dot
+gt:  # Hyperparameters optimized for ~500k budget.
+  layer_type: GritTransformer
+  layers: 16
+  n_heads: 8
+  dim_hidden: 48  # `gt.dim_hidden` must match `gnn.dim_inner`
+  dropout: 0.01
+  attn_dropout: 0.5
+  layer_norm: False
+  batch_norm: True
+  attn:
+    clamp: 5.
+    act: 'relu'
+    full_attn: True
+    edge_enhance: True
+    O_e: True
+    norm_e: True
+gnn:
+  head: inductive_node
+  layers_pre_mp: 0
+  layers_post_mp: 3
+  dim_inner: 48  # `gt.dim_hidden` must match `gnn.dim_inner`
+  batchnorm: True
+  act: relu
+  dropout: 0.0
+  agg: mean
+  normalize_adj: False
+optim:
+  clip_grad_norm: True
+  optimizer: adamW
+  weight_decay: 1e-5
+  base_lr: 0.001
+  max_epoch: 100
+  scheduler: cosine_with_warmup
+  num_warmup_epochs: 5
