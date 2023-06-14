@@ -1,7 +1,7 @@
 # README
-This repo is the official implementation of "Graph Inductive Biases in Transformers without Message Passing" (Ma et al., ICML 2023)
+This repo is the official implementation of [**_Graph Inductive Biases in Transformers without Message Passing_**](https://arxiv.org/abs/2305.17589) (Ma et al., ICML 2023)
 
-> The code-base is built upon GraphGPS (https://github.com/rampasek/GraphGPS)
+> The implementation is based on [GraphGPS (Rampasek et al., 2022)](https://github.com/rampasek/GraphGPS).
 
 ### Python environment setup with Conda
 ```bash
@@ -51,4 +51,14 @@ python main.py --cfg configs/GRIT/zinc-GRIT.yaml  wandb.use False accelerator "c
   - will run 4 trials of experiments parallelly on `GPU:0,1,2,3`.
 
 
+## Citation
+If you find this work useful, please consider citing:
 
+```
+@inproceedings{ma2023GraphInductiveBiases,
+	title = {Graph {Inductive} {Biases} in {Transformers} without {Message} {Passing}},
+	booktitle = {Proc. {Int}. {Conf}. {Mach}. {Learn}.},
+	author = {Ma, Liheng and Lin, Chen and Lim, Derek and Romero-Soriano, Adriana and K. Dokania and Coates, Mark and H.S. Torr, Philip and Lim, Ser-Nam},
+	year = {2023},
+}
+```
