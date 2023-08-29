@@ -146,7 +146,7 @@ class RRWPLinearEdgeEncoder(torch.nn.Module):
         rrwp_val = self.fc(rrwp_val)
 
         if edge_attr is None:
-            edge_attr = torch.zeros(edge_index.size(1), rrwp_val.size(1))
+            edge_attr = edge_index.new_zeros(edge_index.size(1), rrwp_val.size(1))
             # zero padding for non-existing edges
 
         if self.overwrite_old_attr:
@@ -238,7 +238,7 @@ class RRWPLinearEdgeMaskedEncoder(torch.nn.Module):
         num_nodes = batch.num_nodes
 
         if edge_attr is None:
-            edge_attr = torch.zeros(edge_index.size(1), rrwp_val.size(1))
+            edge_attr = edge_index.new_zeros(edge_index.size(1), rrwp_val.size(1))
             # zero padding for non-existing edges
 
         if self.overwrite_old_attr:
