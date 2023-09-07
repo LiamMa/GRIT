@@ -190,7 +190,7 @@ class GritTransformerLayer(nn.Module):
             dropout=attn_dropout,
             clamp=cfg.attn.get("clamp", 5.),
             act=cfg.attn.get("act", "relu"),
-            edge_enhance=True,
+            edge_enhance=cfg.attn.get("edge_enhance", True),
             sqrt_relu=cfg.attn.get("sqrt_relu", False),
             signed_sqrt=cfg.attn.get("signed_sqrt", False),
             scaled_attn =cfg.attn.get("scaled_attn", False),
