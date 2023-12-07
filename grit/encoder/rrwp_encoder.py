@@ -13,7 +13,7 @@ from torch_geometric.graphgym.register import (
     register_node_encoder,
 )
 
-from torch_geometric.utils import remove_self_loops, add_remaining_self_loops
+from torch_geometric.utils import remove_self_loops, add_remaining_self_loops, add_self_loops
 from torch_scatter import scatter
 import warnings
 
