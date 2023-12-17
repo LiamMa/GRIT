@@ -1,5 +1,5 @@
 # README
-This repo is the official implementation of [**_Graph Inductive Biases in Transformers without Message Passing_**](https://proceedings.mlr.press/v202/ma23c.html) [[PMLR]](https://proceedings.mlr.press/v202/ma23c.html) [[arXiv]](https://arxiv.org/abs/2305.17589) (Ma et al., ICML 2023)
+This repo is the official implementation of [**_Graph Inductive Biases in Transformers without Message Passing_**](https://proceedings.mlr.press/v202/ma23c.html)  (Ma et al., ICML 2023) [[PMLR]](https://proceedings.mlr.press/v202/ma23c.html) [[arXiv]](https://arxiv.org/abs/2305.17589)
 
 
 
