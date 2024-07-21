@@ -13,6 +13,16 @@ This repo is the official implementation of [**_Graph Inductive Biases in Transf
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/graph-inductive-biases-in-transformers/graph-classification-on-peptides-func)](https://paperswithcode.com/sota/graph-classification-on-peptides-func?p=graph-inductive-biases-in-transformers)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/graph-inductive-biases-in-transformers/graph-regression-on-peptides-struct)](https://paperswithcode.com/sota/graph-regression-on-peptides-struct?p=graph-inductive-biases-in-transformers)
 
+### Correction of Typos in Paper
+
+There is a typo on $\mathbf{W}\_\text{V}$ in the sentence following Eq. (2). The corrected version is as follws:
+
+``where $\sigma$ is a non-linear activation (ReLU by default); 
+$\mathbf{W}\_\text{Q}, \mathbf{W}\_\text{K}, \mathbf{W}\_\text{Ew}, \mathbf{W}\_\text{Eb} \in \mathbb{R}^{d' \times d}$, $\mathbf{W}\_\text{A} \in \mathbb{R}^{1 \times d'}$,  $\mathbf{W}\_\text{V} \in \mathbb{R}^{d \times d}$ and $\mathbf{W}\_\text{Ev} \in \mathbb{R}^{d \times d'}$ are learnable weight matrices; ......''
+
+
+
+
 ### Python environment setup with Conda
 ```bash
 conda create -n grit python=3.9
