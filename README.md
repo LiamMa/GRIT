@@ -69,6 +69,34 @@ python main.py --cfg configs/GRIT/zinc-GRIT.yaml  wandb.use False accelerator "c
 - Configurations are available under `./configs/GRIT/xxxxx.yaml`
 - Scripts to execute are available under `./scripts/xxx.sh`
   - will run 4 trials of experiments parallelly on `GPU:0,1,2,3`.
+ 
+### Intro to the Code Structure
+Our code is based on GraphGym, which intensively relies on the `module registration`. This mechanism allows us to combine modules by module names.
+However, it is challenging to trace the code from `main.py`. Therefore, we provide hints for the overall code architecture. 
+You can write your customized modules and register them, to build new models under this framework.
+
+
+The overall architecture of the code: ([x] indicates 'x' is a folder in the code)
+```
+- model
+  - utils
+     - [act] (the activation functions: be called by other modules)
+     - [pooling] (global pooling functions: be called in output head for graph level tasks)
+  - [network] (the macro model architecture: stem->backbone->output head)
+  - [encoder] (feature/PE encoders(stem): to bridge inputs to the backbone)
+  - [layer] (backbone layer: )
+  - [head] (task-dependent output head: )
+
+- training pipeline
+  -  data
+    - [loader] (data loaders: )
+    - [transform] (pre-computed transform: PE and other preprocessing)
+  - [train] (training pipeline: logging, visualization, early-stopping, checkpointing, etc.)
+  - [optimizer] (optimizers and lr schedulers: )
+  - [loss] (loss functions: )
+
+- [config] (the default configurations)
+```
 
 
 ## Citation
