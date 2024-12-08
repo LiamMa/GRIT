@@ -97,6 +97,17 @@ The overall architecture of the code: ([x] indicates 'x' is a folder in the code
 
 - [config] (the default configurations)
 ```
+#### Notes on RRWP
+Storing all RRWP values for large graphs can be memory-intensive, as torch_geometric loads the entire dataset into memory by default. 
+
+Alternatively, you can customize the PyG dataset class or calculate RRWP on the fly within the dataloader. 
+Owe to the simplicity of RRWP computations, performing them on the fly only marginally slows down training with multiple processing workers. (for graphs with nodes fewer than 500).
+
+Example config can be found in [cifar10-GRIT-RRWP.yaml](https://github.com/LiamMa/GRIT/blob/f039a252fa8e3bd25103853b831f2d65b4345f6b/configs/GRIT/cifar10-GRIT-RRWP.yaml#L14) (line 5 and line 14).
+
+
+
+
 
 
 ## Citation
