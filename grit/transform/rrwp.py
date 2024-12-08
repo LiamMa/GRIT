@@ -79,7 +79,12 @@ def add_full_rrwp(data,
 
     rel_pe = SparseTensor.from_dense(pe, has_value=True)
     rel_pe_row, rel_pe_col, rel_pe_val = rel_pe.coo()
-    rel_pe_idx = torch.stack([rel_pe_row, rel_pe_col], dim=0)
+    # rel_pe_idx = torch.stack([rel_pe_row, rel_pe_col], dim=0)
+    rel_pe_idx = torch.stack([rel_pe_col, rel_pe_row], dim=0)
+    # the framework of GRIT performing right-mul while adj is row-normalized, 
+    #                 need to switch the order or row and col.
+    #    note: both can work but the current version is more reasonable.
+
 
     if spd:
         spd_idx = walk_length - torch.arange(walk_length)
